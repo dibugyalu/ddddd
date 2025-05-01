@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--凡是描述java类的路径,都是用 点 描述文件或文件夹的路径都是 用 斜杠-->
+<mapper namespace="com.zhisheng.day10_tlias.mapper.DeptMapper">
+
+<!--    动态sql,根据值是否有效,决定是否修改数据-->
+    <update id="updateById">
+        update dept
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        where
+            id=#{id}
+    </update>
+
+</mapper>

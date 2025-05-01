@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--凡是描述java类的路径,都是用 点 描述文件或文件夹的路径都是 用 斜杠-->
+<mapper namespace="com.zhisheng.day10_tlias.mapper.EmpMapper">
+
+    <!--批量删除的功能-->
+    <delete id="delByIds">
+        delete
+        from emp
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--专门查询满足条件的总数量     手动分页的代码
+    <select id="selectCountByCondition" resultType="java.lang.Long">
+        select count(*)
+        from emp
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+        </where>
+    </select>
+
+    &lt;!&ndash;根据分页信息查询当前这一页的数据&ndash;&gt;
+    <select id="selectListByCondition" resultType="com.zhisheng.day10_tlias.entry.Emp">
+        select *
+        from emp
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+        </where>
+        limit #{startRow},#{pageSize}
+    </select>-->
+
+
+    <select id="selectListByMybatisCondition" resultType="com.zhisheng.day10_tlias.entry.Emp">
+        select *
+        from emp
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+</mapper>

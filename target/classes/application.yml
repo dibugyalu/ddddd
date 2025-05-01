@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/day09
+  servlet:
+    multipart:
+      max-file-size: 20MB  # 单个文件不超过20MB
+      max-request-size: 50MB  # 单次请求所有文件总大小不超过 50MB
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    root: info
+
+# 手动在这里配置阿里云相关的参数信息,以供工具类读取并使用
+aly:
+  endpoint: oss-cn-hangzhou.aliyuncs.com
+  bucketName: kge-3qi-test
+  region: cn-hangzhou
+
